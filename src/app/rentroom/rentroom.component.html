@@ -1,0 +1,32 @@
+<div class="tab">
+    <button class="tablinks" (click)="tabClick('1')">1</button>
+    <button class="tablinks" (click)="tabClick('2')">2</button>
+    <button class="tablinks" (click)="tabClick('3')">3</button>
+    <button class="tablinks" (click)="tabClick('4')">4</button>
+</div>
+
+<div *ngIf='tabNum=="1";else other_content'>
+    <h3>London</h3>
+    <p>London is the capital city of England.</p>
+</div>
+
+<ng-template #other_content>
+    <div *ngIf='tabNum=="2";else other_content1'>
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+</ng-template>
+
+<ng-template #other_content1>
+    <div *ngIf='tabNum=="3";else other_content2'>
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+</ng-template>
+
+<ng-template #other_content2>
+    <div>
+        <h3>Taiwan</h3>
+        <p>Taiwan is the best.</p>
+    </div>
+</ng-template>
