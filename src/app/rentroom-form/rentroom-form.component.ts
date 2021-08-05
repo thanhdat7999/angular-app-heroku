@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
+import { FLOAT, float } from 'html2canvas/dist/types/css/property-descriptors/float';
 @Component({
   selector: 'app-rentroom-form',
   templateUrl: './rentroom-form.component.html',
@@ -14,10 +15,11 @@ export class RentroomFormComponent implements OnInit {
 
   fullName:string="";
   date:string="";
+  description:string="";
 
   electric:number=0;
   electricAmount:number=3.5;
-  electricTotal:number=0;
+  electricTotal: number=0;
 
   water:number=0;
   waterAmount:number=3.5;
@@ -25,7 +27,7 @@ export class RentroomFormComponent implements OnInit {
 
   roomPrice:number=0;
 
-  totalPrice:number=0;
+  totalPrice:String="";
 
   constructor() { }
 
@@ -40,7 +42,7 @@ export class RentroomFormComponent implements OnInit {
   }
 
   calculateTotalPrice(){
-    this.totalPrice= this.electricTotal + this.waterTotal + this.roomPrice;
+    this.totalPrice=((this.electricTotal + this.waterTotal + this.roomPrice).toLocaleString('en-GB'));
   }
 
   changeRoomPrice(val: any){
@@ -75,27 +77,35 @@ export class RentroomFormComponent implements OnInit {
     this.calculateTotalPrice();
   }
 
+  getDescription(val:any){
+    this.description=val;
+  }
 
   printPDF(){
     console.log("Run print pdf");
 
     var test =document.getElementById("capture")!; //use ! to avoid error htmlelement | null
+    console.log(test);
     document.getElementById("capture")!.style.display="block";
     html2canvas(test).then((canvas)=>{
       console.log(canvas);
 
-      var imgHeight=canvas.height * 208 / canvas.width;
+      //var imgHeight=canvas.height * 208 / canvas.width;
+      
       var imgData = canvas.toDataURL('image/png');
       console.log(imgData);
       
-      var doc = new jsPDF('p', 'mm', "a6");
+      var doc = new jsPDF('p', 'mm', "a4");
       // var doc = new jsPDF({
       //   orientation:"portrait",
       //   unit:"in",
       //   format:[8,8]
       // });
-      
-      doc.addImage(imgData,'PNG',0,0,100,40);
+      var width = doc.internal.pageSize.getWidth();
+      var height = doc.internal.pageSize.getHeight();
+      console.log(width);
+      console.log(height);
+      doc.addImage(imgData,'PNG',0,2,302,68);
       doc.save("image.pdf");
     });
     document.getElementById("capture")!.style.display="none";
