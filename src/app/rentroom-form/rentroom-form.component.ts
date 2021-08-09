@@ -20,12 +20,15 @@ export class RentroomFormComponent implements OnInit {
   electric:number=0;
   electricAmount:number=3.5;
   electricTotal: number=0;
+  displayElectricTotal: string="";
 
   water:number=0;
   waterAmount:number=3.5;
   waterTotal:number=0;
+  displayWaterTotal: string="";
 
   roomPrice:number=0;
+  displayRoomPrice:string="";
 
   totalPrice:String="";
 
@@ -47,19 +50,22 @@ export class RentroomFormComponent implements OnInit {
 
   changeRoomPrice(val: any){
     this.roomPrice=val*1;
-
+    this.displayRoomPrice=this.roomPrice.toLocaleString('en-GB');
+    
     this.calculateTotalPrice();
   }
 
   changeElectricPrice(val: any){
     this.electric=val;
     this.electricTotal=this.electricAmount*this.electric;
+    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
 
     this.calculateTotalPrice();
   }
   changeElectricAmount(val: any){
     this.electricAmount=val;
     this.electricTotal=this.electricAmount*this.electric;
+    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
 
     this.calculateTotalPrice();
   }
@@ -67,12 +73,14 @@ export class RentroomFormComponent implements OnInit {
   changeWaterPrice(val: any){
     this.water=val;
     this.waterTotal=this.waterAmount*this.water;
+    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
 
     this.calculateTotalPrice();
   }
   changeWaterAmount(val: any){
     this.waterAmount=val;
     this.waterTotal=this.waterAmount*this.water;
+    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
 
     this.calculateTotalPrice();
   }

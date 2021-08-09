@@ -4,10 +4,10 @@
   <div id="capture" class="row">
     <h4 class="text-center col-md-8">{{fullName}}</h4>
     <h4 class="text-center col-md-8">{{date}}</h4>
-    <h4 class="text col-md-8">Giá điện: {{electricTotal}}</h4>
-    <h4 class="text col-md-8">Giá nước: {{waterTotal}}</h4>
-    <h4 class="text col-md-8">Giá phòng: {{roomPrice}}</h4>
-    <h4 class="text col-md-8">Tổng: {{totalPrice}}</h4>
+    <h4 class="text col-md-8">Giá điện: {{displayElectricTotal}} VND</h4>
+    <h4 class="text col-md-8">Giá nước: {{displayWaterTotal}} VND</h4>
+    <h4 class="text col-md-8">Giá phòng: {{displayRoomPrice}} VND</h4>
+    <h4 class="text col-md-8">Tổng: {{totalPrice}} VND</h4>
     <h4 class="text col-md-8">Ghi chú: </h4>
     <textarea class="text col-md-8" style="color: black; font-weight: bold; font-size: 16;border: 0px;">{{description}}</textarea>
   </div>
@@ -48,7 +48,7 @@
         <label class="text-center form-control remove-border-form">=</label>
       </div>
       <div class="col-md-2">
-        <label class="text-center form-control remove-border-form">{{electricTotal}}</label>
+        <label class="text-center form-control remove-border-form">{{displayElectricTotal}}</label>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@
         <label class="text-center form-control remove-border-form">=</label>
       </div>
       <div class="col-md-2">
-        <label class="text-center form-control remove-border-form">{{waterTotal}}</label>
+        <label class="text-center form-control remove-border-form">{{displayWaterTotal}}</label>
       </div>
     </div>
   </div>
