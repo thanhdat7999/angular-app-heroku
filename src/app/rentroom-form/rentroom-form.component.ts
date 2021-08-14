@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
-import { FLOAT, float } from 'html2canvas/dist/types/css/property-descriptors/float';
+
 @Component({
   selector: 'app-rentroom-form',
   templateUrl: './rentroom-form.component.html',
@@ -51,7 +51,24 @@ export class RentroomFormComponent implements OnInit {
   changeRoomPrice(val: any){
     this.roomPrice=val*1;
     this.displayRoomPrice=this.roomPrice.toLocaleString('en-GB');
-    
+
+    if (isNaN(this.roomPrice) || this.roomPrice < 0)
+    {
+      console.log(true);
+      document.getElementById("roomPriceErrorMessage")!.style.display="block";
+      this.roomPrice=0;
+
+      //If error disable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=true;
+    } 
+    else{
+      console.log(false);
+      document.getElementById("roomPriceErrorMessage")!.style.display="none";
+
+      //If not error enable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=false;
+    }
+
     this.calculateTotalPrice();
   }
 
@@ -59,6 +76,23 @@ export class RentroomFormComponent implements OnInit {
     this.electric=val;
     this.electricTotal=this.electricAmount*this.electric;
     this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
+
+    if (isNaN(this.electricTotal) || this.electricTotal < 0)
+    {
+      console.log(true);
+      document.getElementById("electricPriceErrorMessage")!.style.display="block";
+      this.electricTotal = 0;
+
+       //If error disable button
+       (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=true;
+    }
+    else{
+      console.log(false);
+      document.getElementById("electricPriceErrorMessage")!.style.display="none";
+
+      //If not error enable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=false;
+    }
 
     this.calculateTotalPrice();
   }
@@ -74,6 +108,24 @@ export class RentroomFormComponent implements OnInit {
     this.water=val;
     this.waterTotal=this.waterAmount*this.water;
     this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
+
+    if (isNaN(this.waterTotal) || this.waterTotal < 0)
+    {
+      console.log(true);
+      document.getElementById("waterPriceErrorMessage")!.style.display="block";
+      this.waterTotal = 0;
+
+       //If error disable button
+       (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=true;
+    }
+    else{
+      console.log(false);
+      document.getElementById("waterPriceErrorMessage")!.style.display="none";
+
+      //If not error enable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=false;
+    }
+   
 
     this.calculateTotalPrice();
   }
