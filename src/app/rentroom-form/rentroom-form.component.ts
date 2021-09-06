@@ -17,6 +17,7 @@ export class RentroomFormComponent implements OnInit {
   date:string="";
   description:string="";
 
+  preElectric:number=0;
   electric:number=0;
   electricAmount:number=3.5;
   electricTotal: number=0;
@@ -45,9 +46,10 @@ export class RentroomFormComponent implements OnInit {
   }
 
   calculateTotalPrice(){
-    this.totalPrice=((this.electricTotal + this.waterTotal + this.roomPrice).toLocaleString('en-GB'));
+    this.totalPrice=((this.electricTotal + this.waterTotal + this.roomPrice).toLocaleString('en-GB')) + " VND";
   }
 
+  //Thay doi tien tro
   changeRoomPrice(val: any){
     this.roomPrice=val*1;
     this.displayRoomPrice=this.roomPrice.toLocaleString('en-GB');
@@ -72,10 +74,38 @@ export class RentroomFormComponent implements OnInit {
     this.calculateTotalPrice();
   }
 
+  //Tính tiền điện 
+  //Khi tiền điện tháng trước thay đổi
+  changePreElectricPrice(val: any){
+    this.preElectric=val;
+
+    this.electricTotal=this.electricAmount*(this.preElectric - this.electric) * 1000;
+    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB') + " VND";
+
+    if (isNaN(this.electricTotal) || this.electricTotal < 0)
+    {
+      console.log(true);
+      document.getElementById("electricPriceErrorMessage")!.style.display="block";
+      this.electricTotal = 0;
+
+       //If error disable button
+       (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=true;
+    }
+    else{
+      console.log(false);
+      document.getElementById("electricPriceErrorMessage")!.style.display="none";
+
+      //If not error enable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=false;
+    }
+
+    this.calculateTotalPrice();
+  }
+  //Khi tiền điện tháng này thay đổi
   changeElectricPrice(val: any){
     this.electric=val;
-    this.electricTotal=this.electricAmount*this.electric;
-    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
+    this.electricTotal=this.electricAmount*(this.preElectric - this.electric)*1000;
+    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB') + " VND";
 
     if (isNaN(this.electricTotal) || this.electricTotal < 0)
     {
@@ -98,16 +128,17 @@ export class RentroomFormComponent implements OnInit {
   }
   changeElectricAmount(val: any){
     this.electricAmount=val;
-    this.electricTotal=this.electricAmount*this.electric;
-    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
+    this.electricTotal=this.electricAmount*(this.preElectric - this.electric)*1000;
+    this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB')+ " VND";
 
     this.calculateTotalPrice();
   }
 
+  //Tính tiền nước
   changeWaterPrice(val: any){
     this.water=val;
-    this.waterTotal=this.waterAmount*this.water;
-    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
+    this.waterTotal=this.waterAmount*this.water*1000;
+    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB')+ " VND";
 
     if (isNaN(this.waterTotal) || this.waterTotal < 0)
     {
@@ -131,8 +162,8 @@ export class RentroomFormComponent implements OnInit {
   }
   changeWaterAmount(val: any){
     this.waterAmount=val;
-    this.waterTotal=this.waterAmount*this.water;
-    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
+    this.waterTotal=this.waterAmount*this.water*1000;
+    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB')+ " VND";
 
     this.calculateTotalPrice();
   }

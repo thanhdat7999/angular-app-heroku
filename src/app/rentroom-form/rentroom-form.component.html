@@ -31,23 +31,41 @@
     </div>
   </div>
   <div class="form-group col-md-12">
-    <label for="inputEmail4">Điện</label>
+    
     <div class="row">
       <div class="col-md-2">
+        <label for="inputEmail4">Điện tháng trước</label>
+        <input [ngModel]="preElectric" (ngModelChange)="changePreElectricPrice($event)" name="preElectric" type="text" pattern="[A-Za-z]"
+          class="form-control" id="preElectric" placeholder="Nhập điện">
+      </div>
+      <div class="col-md-2">
+        <label for="inputEmail4">Điện tháng này</label>
         <input [ngModel]="electric" (ngModelChange)="changeElectricPrice($event)" name="electric" type="text" pattern="[A-Za-z]"
           class="form-control" id="electric" placeholder="Nhập điện">
       </div>
       <div class="col-md-1">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">X</label>
       </div>
       <div class="col-md-2">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <input [ngModel]="electricAmount" (ngModelChange)="changeElectricAmount($event)" name="electricAmount"
           class="form-control" type="number" value="electricAmount" step="0.1">
       </div>
       <div class="col-md-1">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">=</label>
       </div>
       <div class="col-md-2">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">{{displayElectricTotal}}</label>
       </div>
     </div>
@@ -72,7 +90,7 @@
       <div class="col-md-1">
         <label class="text-center form-control remove-border-form">=</label>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-4">
         <label class="text-center form-control remove-border-form">{{displayWaterTotal}}</label>
       </div>
     </div>
@@ -83,10 +101,11 @@
   <div class="form-group col-md-12">
     <label for="inputEmail4">Tiền nhà trọ</label>
     <input [ngModel]="roomPrice" (ngModelChange)="changeRoomPrice($event)" name="roomPrice" type="text"
-      class="form-control" id="roomPrice" placeholder="Nhập tiền phòng">
+      class="form-control" id="roomPrice" placeholder="Nhập tiền phòng" value="{{displayRoomPrice}}">
       <div>
         <label id="roomPriceErrorMessage" class="text form-control remove-border-form" style="display: none; color: red;">Xin hãy nhập số và số lớn hơn 0</label>
       </div>
+      <label>{{displayRoomPrice}}</label>
   </div>
   <div class="form-group col-md-12">
     <label for="inputEmail4">Tổng</label><br>
