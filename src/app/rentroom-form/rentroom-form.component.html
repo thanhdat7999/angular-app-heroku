@@ -144,6 +144,9 @@
     <input [ngModel]="roomPrice" (ngModelChange)="changeRoomPrice($event)" name="roomPrice" type="text"
       class="form-control" id="roomPrice" placeholder="Nhập tiền phòng" value="{{displayRoomPrice}}">
       <div>
+        <label id="" class="text form-control remove-border-form">{{displayRoomPrice}}</label>
+      </div>
+      <div>
         <label id="roomPriceErrorMessage" class="text form-control remove-border-form" style="display: none; color: red;">Xin hãy nhập số và số lớn hơn 0</label>
       </div>
   </div>
