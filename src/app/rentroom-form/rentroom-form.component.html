@@ -7,9 +7,9 @@
     <h4 class="text col-md-8">Giá điện: {{displayElectricTotal}} VND</h4>
     <h4 class="text col-md-8">Giá nước: {{displayWaterTotal}} VND</h4>
     <h4 class="text col-md-8">Giá phòng: {{displayRoomPrice}} VND</h4>
-    <h4 class="text col-md-8">Tổng: {{totalPrice}} VND</h4>
+    <h4 class="text col-md-8">Tổng: {{displayElectricTotal}} + {{displayWaterTotal}} + {{displayRoomPrice}} = {{totalPrice}}</h4>
     <h4 class="text col-md-8">Ghi chú: </h4>
-    <textarea class="text col-md-8" style="color: black; font-weight: bold; font-size: 16;border: 0px;">{{description}}</textarea>
+    <textarea class="text col-md-8" style="color: black; font-weight: normal; font-size: 24px;border: 0px;">{{description}}</textarea>
   </div>
   <button id="btnPrintPDF" (click)="printPDF()" class="btn btn-primary">Print PDF</button>
 </div>
@@ -72,7 +72,7 @@
         <div class="col-md-1">
           <label style="visibility: hidden;">...</label>
         </div>
-        <label class="text-center form-control remove-border-form">{{displayElectricTotal}}</label>
+        <label class="text-center form-control remove-border-form">{{displayElectricTotal}} VND</label>
       </div>
     </div>
     <div>
@@ -120,7 +120,7 @@
         <div class="col-md-1">
           <label style="visibility: hidden;">...</label>
         </div>
-        <label class="text-center form-control remove-border-form">{{displayWaterTotal}}</label>
+        <label class="text-center form-control remove-border-form">{{displayWaterTotal}} VND</label>
       </div>
     </div>
     <div>
