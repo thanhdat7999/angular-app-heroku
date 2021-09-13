@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-rentroom-form',
@@ -14,17 +15,19 @@ export class RentroomFormComponent implements OnInit {
 
 
   fullName:string="";
-  date:string="";
+  datetime:string="";
   description:string="";
 
   preElectric:number=0;
   electric:number=0;
+  electricResult:number=0;
   electricAmount:number=3.5;
   electricTotal: number=0;
   displayElectricTotal: string="";
 
   preWater:number=0;
   water:number=0;
+  waterResult:number=0;
   waterAmount:number=3.5;
   waterTotal:number=0;
   displayWaterTotal: string="";
@@ -43,7 +46,9 @@ export class RentroomFormComponent implements OnInit {
     this.fullName=val;
   }
   getDate(val: any){
-    this.date=val;
+    const format='dd/MM/yyyy';
+    const locale='en-US';
+    this.datetime= val //formatDate(val,format,locate);
   }
 
   calculateTotalPrice(){
@@ -81,6 +86,7 @@ export class RentroomFormComponent implements OnInit {
     this.preElectric=val;
 
     this.electricTotal=this.electricAmount*(this.preElectric - this.electric) * 1000;
+    this.electricResult=this.preElectric - this.electric;
     this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
 
     if (isNaN(this.electricTotal) || this.electricTotal < 0)
@@ -107,7 +113,7 @@ export class RentroomFormComponent implements OnInit {
     this.electric=val;
     this.electricTotal=this.electricAmount*(this.preElectric - this.electric)*1000;
     this.displayElectricTotal=this.electricTotal.toLocaleString('en-GB');
-
+    this.electricResult=this.preElectric - this.electric;
     if (isNaN(this.electricTotal) || this.electricTotal < 0)
     {
       console.log(true);
@@ -141,7 +147,7 @@ export class RentroomFormComponent implements OnInit {
     this.preWater=val;
     this.waterTotal=this.waterAmount*(this.preWater - this.water)*1000;
     this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
-
+    this.waterResult=this.preWater - this.water;
     if (isNaN(this.waterTotal) || this.waterTotal < 0)
     {
       console.log(true);
@@ -167,7 +173,7 @@ export class RentroomFormComponent implements OnInit {
     this.water=val;
     this.waterTotal=this.waterAmount*(this.preWater - this.water)*1000;
     this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB');
-
+    this.waterResult=this.preWater - this.water;
     if (isNaN(this.waterTotal) || this.waterTotal < 0)
     {
       console.log(true);
