@@ -74,23 +74,40 @@
     </div>
   </div>
   <div class="form-group col-md-12">
-    <label for="inputEmail4">Nước</label>
     <div class="row">
       <div class="col-md-2">
+        <label for="inputEmail4">Nước tháng trước</label>
+        <input [ngModel]="preWater" (ngModelChange)="changePreWaterPrice($event)" name="preWater" type="text"
+          class="form-control" id="preWater" placeholder="Nhập nước">
+      </div>
+      <div class="col-md-2">
+        <label for="inputEmail4">Nước tháng này</label>
         <input [ngModel]="water" (ngModelChange)="changeWaterPrice($event)" name="water" type="text"
           class="form-control" id="water" placeholder="Nhập nước">
       </div>
       <div class="col-md-1">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">X</label>
       </div>
       <div class="col-md-2">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <input [ngModel]="waterAmount" (ngModelChange)="changeWaterAmount($event)" name="waterAmount"
           class="form-control" type="number" value="waterAmount" step="0.1">
       </div>
       <div class="col-md-1">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">=</label>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2">
+        <div class="col-md-1">
+          <label style="visibility: hidden;">...</label>
+        </div>
         <label class="text-center form-control remove-border-form">{{displayWaterTotal}}</label>
       </div>
     </div>

@@ -23,6 +23,7 @@ export class RentroomFormComponent implements OnInit {
   electricTotal: number=0;
   displayElectricTotal: string="";
 
+  preWater:number=0;
   water:number=0;
   waterAmount:number=3.5;
   waterTotal:number=0;
@@ -135,9 +136,10 @@ export class RentroomFormComponent implements OnInit {
   }
 
   //Tính tiền nước
-  changeWaterPrice(val: any){
-    this.water=val;
-    this.waterTotal=this.waterAmount*this.water*1000;
+  //Khi tiền nước tháng trước thay đổi
+  changePreWaterPrice(val: any){
+    this.preWater=val;
+    this.waterTotal=this.waterAmount*(this.preWater - this.water)*1000;
     this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB')+ " VND";
 
     if (isNaN(this.waterTotal) || this.waterTotal < 0)
@@ -160,9 +162,36 @@ export class RentroomFormComponent implements OnInit {
 
     this.calculateTotalPrice();
   }
+  //tính tiền nước tháng này thay đổi
+  changeWaterPrice(val: any){
+    this.water=val;
+    this.waterTotal=this.waterAmount*(this.preWater - this.water)*1000;
+    this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB')+ " VND";
+
+    if (isNaN(this.waterTotal) || this.waterTotal < 0)
+    {
+      console.log(true);
+      document.getElementById("waterPriceErrorMessage")!.style.display="block";
+      this.waterTotal = 0;
+
+       //If error disable button
+       (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=true;
+    }
+    else{
+      console.log(false);
+      document.getElementById("waterPriceErrorMessage")!.style.display="none";
+
+      //If not error enable button
+      (<HTMLInputElement> document.getElementById("btnPrintPDF")).disabled=false;
+    }
+   
+
+    this.calculateTotalPrice();
+  }
+  //Tính số lượng nước thay đổi
   changeWaterAmount(val: any){
     this.waterAmount=val;
-    this.waterTotal=this.waterAmount*this.water*1000;
+    this.waterTotal=this.waterAmount*(this.preWater - this.water)*1000;
     this.displayWaterTotal=this.waterTotal.toLocaleString('en-GB')+ " VND";
 
     this.calculateTotalPrice();
