@@ -4,15 +4,10 @@
   <div id="capture" class="row" style="display: none;">
     <h4 class="text-center col-md-8">{{fullName}}</h4>
     <h4 class="text-center col-md-8">{{datetime | date:'dd/MM/yyyy'}}</h4>
-    <br>
     <h4 class="text col-md-8">Giá điện: {{preElectric}} - {{electric}}  = {{electricResult}} * {{electricAmount}} = {{displayElectricTotal}} VND</h4>
-    <br>
     <h4 class="text col-md-8">Giá nước: {{preWater}} - {{water}} = {{waterResult}} * {{waterAmount}} = {{displayWaterTotal}} VND</h4>
-    <br>
     <h4 class="text col-md-8">Giá phòng: {{displayRoomPrice}} VND</h4>
-    <br>
     <h4 class="text col-md-8">Tổng: {{displayElectricTotal}} + {{displayWaterTotal}} + {{displayRoomPrice}} = {{totalPrice}}</h4>
-    <br>
     <h4 class="text col-md-8">Ghi chú: </h4>
     <textarea class="text col-md-8" style="color: black; font-weight: normal; font-size: 24px;border: 0px;">{{description}}</textarea>
   </div>
